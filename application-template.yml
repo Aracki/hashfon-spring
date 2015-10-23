@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/hashfon
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+
+  thymeleaf:
+    cache: false
