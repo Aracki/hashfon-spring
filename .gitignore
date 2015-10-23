@@ -1,0 +1,24 @@
+/src/main/resources/application.yml
+/src/main/resources/application.yml~
+
+# Java
+build/
+
+# Gradle
+.gradle
+
+# Idea
+.idea
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+# > the following should be created by `./gradlew eclipse`
+.classpath
+.project
+# > ignore all eclipse settings by default
+.settings
+# > other misc eclipse artifacts
+.springBeans
+bin
