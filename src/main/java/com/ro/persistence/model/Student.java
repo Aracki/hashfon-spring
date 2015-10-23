@@ -1,4 +1,4 @@
-package com.ro.persistence;
+package com.ro.persistence.model;
 
 import com.google.common.base.Objects;
 
