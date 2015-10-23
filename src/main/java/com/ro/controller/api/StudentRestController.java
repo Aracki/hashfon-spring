@@ -14,7 +14,7 @@ import java.util.List;
  * Created by ivan on 23.10.15..
  */
 @RestController
-@RequestMapping(value = "/api/resources/students")
+@RequestMapping(value = "/api/resources/student")
 public class StudentRestController {
 
     private static final Logger logger = Logger.getLogger(StudentRestController.class);
