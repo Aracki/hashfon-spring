@@ -6,6 +6,7 @@ import com.google.common.base.Objects;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -39,7 +40,7 @@ public class Student implements Serializable {
     private Integer godinaDiplomiranja;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private Set<Snippet> snippets;
+    private List<Snippet> snippets;
 
     public Student(Long id, String ime, String prezime, String password, String telefon, String email, String slika, String adresa, Date datumRodjenja, String dodatneInformacije, String token, Integer godinaDiplomiranja) {
         this.id = id;
@@ -63,12 +64,11 @@ public class Student implements Serializable {
         this.id = id;
     }
 
-    @JsonIgnore
-    public Set<Snippet> getSnippets() {
+    public List<Snippet> getSnippets() {
         return snippets;
     }
 
-    public void setSnippets(Set<Snippet> snippets) {
+    public void setSnippets(List<Snippet> snippets) {
         this.snippets = snippets;
     }
 

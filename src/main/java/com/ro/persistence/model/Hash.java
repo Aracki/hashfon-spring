@@ -5,6 +5,7 @@ import com.google.common.base.Objects;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,7 +22,7 @@ public class Hash implements Serializable {
     private String tag;
 
     @OneToMany(mappedBy = "hash", cascade = CascadeType.ALL)
-    private Set<Snippet> snippets;
+    private List<Snippet> snippets;
 
     public Hash() {
     }
@@ -34,12 +35,13 @@ public class Hash implements Serializable {
         this.id = id;
         this.tag = tag;
     }
+
     @JsonIgnore
-    public Set<Snippet> getSnippets() {
+    public List<Snippet> getSnippets() {
         return snippets;
     }
 
-    public void setSnippets(Set<Snippet> snippets) {
+    public void setSnippets(List<Snippet> snippets) {
         this.snippets = snippets;
     }
 
