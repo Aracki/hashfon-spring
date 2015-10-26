@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Student</title>
+
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/student.css" rel="stylesheet">
+    <link href="css/profil.css" rel="stylesheet">
+
+</head>
+
+<body onload="vratiStudenta(); searchStudenta(); ">
+
+<h2>Student</h2>
+
+
+<div class="navbar navbar-red navbar-static-top">
+
+    <ul class="nav navbar-nav" id="traka">
+        <li>
+            <a href="pocetna.html"><i class="glyphicon glyphicon-home"></i> Home</a>
+        </li>
+
+
+        <li>
+            <a href="kompanija_profil.html" id="glava"><i class="glyphicon glyphicon-user"></i> Profil</a>
+        </li>
+
+    </ul>
+    <h2>Iteh #fon - student</h2>
+</div>
+
+
+<div class="full col-sm-9">
+
+    <!-- content -->
+    <div class="row">
+
+        <!-- main col left -->
+        <div class="col-sm-5">
+
+            <div class="panel panel-default" id="slika_div">
+                <div class="panel-thumbnail" id="slikaK">
+                    <img src="assets/img/bg_5.jpg" class="img-responsive">
+                </div>
+                <div class="panel-body">
+                    <p class="lead" id="imeprezime"></p>
+
+                    <p>13 Oglasa</p>
+
+
+                    <i class="glyphicon glyphicon-user"></i>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- main col right -->
+        <div class="col-sm-7">
+
+            <div class="panel panel-default" id="profil">
+                <div class="panel-heading"><a id="editStudent" href="#" class="pull-right"><i
+                        class="glyphicon glyphicon-pencil"></i></a>
+                    <h4>Informacije o studentu</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+
+                        <li class="list-group-item editable">
+                            <div class="ext-left">
+                                Ime :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="ext-right">
+                                <p class="ext-name" id="ime"></p>
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item editable">
+                            <div class="ext-left">
+                                Prezime :&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="ext-right">
+                                <p class="ext-name" id="prezime"></p>
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item editable">
+                            <div class="ext-left">
+                                Telefon :&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="ext-right">
+                                <p class="ext-name" id="telefon"></p>
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item editable">
+                            <div class="ext-left">
+                                Email :&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="ext-right">
+                                <p class="ext-name" id="email"></p>
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item editable">
+                            <div class="ext-left">
+                                Adresa :&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="ext-right">
+                                <p class="ext-name" id="adresa"></p>
+
+                            </div>
+                        </li>
+
+                        <li class="list-group-item editable">
+                            <div class="ext-left">
+                                Datum rodjenja :&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="ext-right">
+                                <p class="ext-name" id="datum_rodjenja"></p>
+
+                            </div>
+                        </li>
+                        <br>
+
+                        <div class="form-group">
+                            <label class="editable" for="comment">Dodatne informacije :</label>
+                            <textarea class="form-control" rows="5" id="dodatne_informacije"></textarea>
+                        </div>
+
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!--/row-->
+
+
+    <h1>Snippeti: </h1>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="row" id="rowSnipeti">
+
+
+        <!-- <div class="panel panel-default" id="snipet">
+          <div class="panel-heading">
+            <h4>Snippet 1</h4>
+          </div>
+          <div class="panel-body">
+
+            <div class="container">
+              <div class="row-fluid">
+                <div class="span6 col-md-6" style="padding-right:20px; border-right: 1px solid #ccc; height:150px;">
+                  <p>Some Contents Here...</p>
+                </div>
+
+                <div class="span6 col-md-6">
+                  <p>github link</p> <a href="https://github.com/Aracki/hashfon">https://github.com/Aracki/hashfon</a>
+                  <br>
+                  <br>
+                  <p> dsaokasdko</p>
+
+
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div> -->
+    </div>
+
+
+</div>
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>
