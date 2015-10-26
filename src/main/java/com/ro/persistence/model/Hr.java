@@ -57,7 +57,6 @@ public class Hr implements Serializable {
         this.kompanija = kompanija;
     }
 
-    @JsonIgnore
     public HrPk getHrPk() {
         return hrPk;
     }

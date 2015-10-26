@@ -1,7 +1,11 @@
 package com.ro.persistence.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import com.google.common.base.Objects;
+import com.ro.persistence.util.JsonDateSerializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -137,6 +141,7 @@ public class Student implements Serializable {
         this.adresa = adresa;
     }
 
+    @JsonSerialize(using = JsonDateSerializer.class)
     public Date getDatumRodjenja() {
         return datumRodjenja;
     }

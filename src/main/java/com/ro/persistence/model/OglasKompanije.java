@@ -1,7 +1,6 @@
 package com.ro.persistence.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
 import com.google.common.base.Objects;
 
 import javax.persistence.*;
