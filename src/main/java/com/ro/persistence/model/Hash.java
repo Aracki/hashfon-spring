@@ -1,9 +1,11 @@
 package com.ro.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Objects;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by ognjen on 23.10.15..
@@ -18,6 +20,9 @@ public class Hash implements Serializable {
     private Long id;
     private String tag;
 
+    @OneToMany(mappedBy = "hash", cascade = CascadeType.ALL)
+    private Set<Snippet> snippets;
+
     public Hash() {
     }
 
@@ -28,6 +33,14 @@ public class Hash implements Serializable {
     public Hash(Long id, String tag) {
         this.id = id;
         this.tag = tag;
+    }
+    @JsonIgnore
+    public Set<Snippet> getSnippets() {
+        return snippets;
+    }
+
+    public void setSnippets(Set<Snippet> snippets) {
+        this.snippets = snippets;
     }
 
     public Long getId() {
