@@ -5,6 +5,7 @@ import com.ro.persistence.repositories.SnippetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,12 +27,12 @@ public class SnippetRestController {
     }
 
     @RequestMapping(value = "/search/getById")
-    public Snippet getById(@PathVariable Long id) {
+    public Snippet getById(@RequestParam Long id) {
         return snippetRepository.findById(id);
     }
 
     @RequestMapping(value = "/search/getByIdStudent")
-    public Snippet getByIdStudent(@PathVariable Long idStudent) {
+    public List<Snippet> getByIdStudent(@RequestParam Long idStudent) {
         return snippetRepository.findByIdStudent(idStudent);
     }
 

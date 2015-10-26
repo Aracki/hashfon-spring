@@ -4,6 +4,7 @@ import com.ro.persistence.model.Hash;
 import com.ro.persistence.repositories.HashRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,6 +23,16 @@ public class HashRestController {
     @RequestMapping(value = "")
     public List<Hash> getAll() {
         return hashRepository.findAll();
+    }
+
+    @RequestMapping(value = "/search/getById")
+    public Hash getById(@RequestParam Long id) {
+        return hashRepository.findById(id);
+    }
+
+    @RequestMapping(value = "/search/getByTag")
+    public List<Hash> getByTag(@RequestParam String tag) {
+        return hashRepository.findByTag(tag);
     }
 
 }
