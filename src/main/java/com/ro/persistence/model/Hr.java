@@ -1,5 +1,6 @@
 package com.ro.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Objects;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Hr implements Serializable {
     private String token;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Kompanija kompanija;
 
     public Hr() {
@@ -46,6 +48,7 @@ public class Hr implements Serializable {
         this.hrPk = new HrPk(idKompanije, id);
     }
 
+    @JsonIgnore
     public Kompanija getKompanija() {
         return kompanija;
     }
@@ -54,6 +57,7 @@ public class Hr implements Serializable {
         this.kompanija = kompanija;
     }
 
+    @JsonIgnore
     public HrPk getHrPk() {
         return hrPk;
     }

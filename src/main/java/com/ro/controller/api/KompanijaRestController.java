@@ -3,9 +3,9 @@ package com.ro.controller.api;
 import com.ro.persistence.model.Kompanija;
 import com.ro.persistence.repositories.KompanijaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.PathParam;
 import java.util.List;
 
 /**
@@ -24,4 +24,21 @@ public class KompanijaRestController {
         return kompanijaRepository.findAll();
     }
 
+    @RequestMapping(value = "/{id}")
+    public Kompanija get(@PathVariable Long id) {
+        Kompanija k = kompanijaRepository.findOne(id);
+        return k;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public Kompanija insert(Kompanija k) {
+        kompanijaRepository.save(k);
+        return k;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public Kompanija update(Kompanija k) {
+        kompanijaRepository.save(k);
+        return k;
+    }
 }

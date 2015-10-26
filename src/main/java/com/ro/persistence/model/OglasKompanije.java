@@ -1,5 +1,7 @@
 package com.ro.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.google.common.base.Objects;
 
 import javax.persistence.*;
@@ -22,6 +24,7 @@ public class OglasKompanije implements Serializable {
     private String naziv;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Kompanija kompanija;
 
     public OglasKompanije() {

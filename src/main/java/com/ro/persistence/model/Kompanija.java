@@ -1,5 +1,6 @@
 package com.ro.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Objects;
 
 import javax.persistence.*;
@@ -44,6 +45,7 @@ public class Kompanija implements Serializable {
         this.adresa = adresa;
     }
 
+    @JsonIgnore
     public List<Hr> getHrList() {
         return hrList;
     }
@@ -52,6 +54,7 @@ public class Kompanija implements Serializable {
         this.hrList = hrList;
     }
 
+    @JsonIgnore
     public List<OglasKompanije> getOglasKompanijeList() {
         return oglasKompanijeList;
     }
