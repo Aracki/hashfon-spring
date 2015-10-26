@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by ognjen on 23.10.15..
@@ -17,8 +18,15 @@ public class Snippet implements Serializable {
 
     @EmbeddedId
     protected SnippetPk snippetPk;
-
     private String code;
+
+    @JoinColumn(name = "id_student", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Student student;
+
+    @JoinColumn(name = "id_hash", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Hash hash;
 
     public Snippet(SnippetPk snippetPk, String code) {
         this.snippetPk = snippetPk;
@@ -30,6 +38,22 @@ public class Snippet implements Serializable {
 
     public Snippet(SnippetPk snippetPK) {
         this.snippetPk = snippetPK;
+    }
+
+    public Hash getHash() {
+        return hash;
+    }
+
+    public void setHash(Hash hash) {
+        this.hash = hash;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public SnippetPk getSnippetPk() {

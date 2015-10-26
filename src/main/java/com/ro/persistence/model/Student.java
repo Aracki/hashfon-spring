@@ -1,10 +1,12 @@
 package com.ro.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Objects;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by ivan on 23.10.15..
@@ -36,6 +38,9 @@ public class Student implements Serializable {
     @Column(name = "godina_diplomiranja")
     private Integer godinaDiplomiranja;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private Set<Snippet> snippets;
+
     public Student(Long id, String ime, String prezime, String password, String telefon, String email, String slika, String adresa, Date datumRodjenja, String dodatneInformacije, String token, Integer godinaDiplomiranja) {
         this.id = id;
         this.ime = ime;
@@ -56,6 +61,15 @@ public class Student implements Serializable {
 
     public Student(Long id) {
         this.id = id;
+    }
+
+    @JsonIgnore
+    public Set<Snippet> getSnippets() {
+        return snippets;
+    }
+
+    public void setSnippets(Set<Snippet> snippets) {
+        this.snippets = snippets;
     }
 
     public Long getId() {
