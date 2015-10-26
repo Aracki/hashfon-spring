@@ -24,6 +24,9 @@ public class Hr implements Serializable {
     private String prezime;
     private String token;
 
+    @ManyToOne(optional = false)
+    private Kompanija kompanija;
+
     public Hr() {
     }
 
@@ -41,6 +44,14 @@ public class Hr implements Serializable {
 
     public Hr(long idKompanije, long id) {
         this.hrPk = new HrPk(idKompanije, id);
+    }
+
+    public Kompanija getKompanija() {
+        return kompanija;
+    }
+
+    public void setKompanija(Kompanija kompanija) {
+        this.kompanija = kompanija;
     }
 
     public HrPk getHrPk() {

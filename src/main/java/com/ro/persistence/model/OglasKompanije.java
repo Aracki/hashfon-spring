@@ -2,10 +2,7 @@ package com.ro.persistence.model;
 
 import com.google.common.base.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -24,6 +21,9 @@ public class OglasKompanije implements Serializable {
     private String oglas;
     private String naziv;
 
+    @ManyToOne(optional = false)
+    private Kompanija kompanija;
+
     public OglasKompanije() {
     }
 
@@ -39,6 +39,14 @@ public class OglasKompanije implements Serializable {
         this.oglasKompanijePk = oglasKompanijePk;
         this.oglas = oglas;
         this.naziv = naziv;
+    }
+
+    public Kompanija getKompanija() {
+        return kompanija;
+    }
+
+    public void setKompanija(Kompanija kompanija) {
+        this.kompanija = kompanija;
     }
 
     public OglasKompanijePk getOglasKompanijePk() {

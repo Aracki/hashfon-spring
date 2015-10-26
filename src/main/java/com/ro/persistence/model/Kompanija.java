@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by ognjen on 23.10.15..
@@ -25,6 +26,12 @@ public class Kompanija implements Serializable {
     private String email;
     private String adresa;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kompanija")
+    private List<OglasKompanije> oglasKompanijeList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kompanija")
+    private List<Hr> hrList;
+
     public Kompanija() {
     }
 
@@ -35,6 +42,22 @@ public class Kompanija implements Serializable {
         this.slika = slika;
         this.email = email;
         this.adresa = adresa;
+    }
+
+    public List<Hr> getHrList() {
+        return hrList;
+    }
+
+    public void setHrList(List<Hr> hrList) {
+        this.hrList = hrList;
+    }
+
+    public List<OglasKompanije> getOglasKompanijeList() {
+        return oglasKompanijeList;
+    }
+
+    public void setOglasKompanijeList(List<OglasKompanije> oglasKompanijeList) {
+        this.oglasKompanijeList = oglasKompanijeList;
     }
 
     public String getAdresa() {
