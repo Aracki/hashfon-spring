@@ -34,6 +34,7 @@ public class SnippetRestController {
     @RequestMapping(value = "/search/getByIdStudent")
     public List<Snippet> getByIdStudent(@RequestParam Long idStudent) {
         return snippetRepository.findByIdStudent(idStudent);
+
     }
 
 }
