@@ -29,8 +29,8 @@ public class StudentRestController {
         return studentRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}")
-    public Student getById(@PathVariable Long id) {
+    @RequestMapping(value = "/search/getById")
+    public Student getById(@RequestParam Long id) {
         return studentRepository.findOne(id);
     }
 

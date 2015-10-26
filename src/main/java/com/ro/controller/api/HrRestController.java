@@ -6,6 +6,7 @@ import com.ro.persistence.repositories.HrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.PathParam;
@@ -27,9 +28,34 @@ public class HrRestController {
         return hrRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}")
-    public Hr get(@PathParam("id") HrPk id) {
-        return hrRepository.findOne(id);
+    @RequestMapping(value = "/search/getById")
+    public Hr getById(@RequestParam Long id) {
+        return hrRepository.findById(id);
+    }
+
+    @RequestMapping(value = "/search/getByIdKompanije")
+    public List<Hr> getByIdKompanije(@RequestParam Long idKompanije) {
+        return hrRepository.findByIdKompanije(idKompanije);
+    }
+
+    @RequestMapping(value = "/search/getByEmail")
+    public Hr getByEmail(@RequestParam String email) {
+        return hrRepository.findByEmail(email);
+    }
+
+    @RequestMapping(value = "/search/getByIme")
+    public List<Hr> getByIme(@RequestParam String ime) {
+        return hrRepository.findByIme(ime);
+    }
+
+    @RequestMapping(value = "/search/getByPrezime")
+    public List<Hr> getByPrezime(@RequestParam String prezime) {
+        return hrRepository.findByPrezime(prezime);
+    }
+
+    @RequestMapping(value = "/search/getByToken")
+    public Hr getByToken(@RequestParam String token) {
+        return hrRepository.findByToken(token);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)

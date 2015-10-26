@@ -4,10 +4,7 @@ import com.ro.persistence.model.OglasKompanije;
 import com.ro.persistence.model.OglasKompanijePk;
 import com.ro.persistence.repositories.OglasKompanijeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.PathParam;
 import java.util.List;
@@ -28,9 +25,14 @@ public class OglasKompanijeRestController {
         return oglasKompanijeRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}")
-    public OglasKompanije get(@PathVariable OglasKompanijePk id) {
-        return oglasKompanijeRepository.findOne(id);
+    @RequestMapping(value = "/search/getById")
+    public OglasKompanije getById(@RequestParam Long id) {
+        return oglasKompanijeRepository.findById(id);
+    }
+
+    @RequestMapping(value = "/search/getByIdKompanije")
+    public List<OglasKompanije> getByIdKompanije(@RequestParam Long idKompanije) {
+        return oglasKompanijeRepository.findByIdKompanije(idKompanije);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)

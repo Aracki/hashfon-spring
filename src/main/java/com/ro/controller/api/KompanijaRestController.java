@@ -24,6 +24,26 @@ public class KompanijaRestController {
         return kompanijaRepository.findAll();
     }
 
+    @RequestMapping(value = "/search/getById")
+    public Kompanija getById(@RequestParam Long id) {
+        return kompanijaRepository.findById(id);
+    }
+
+    @RequestMapping(value = "/search/getByIme")
+    public Kompanija getByIme(@RequestParam String ime) {
+        return kompanijaRepository.findByIme(ime);
+    }
+
+    @RequestMapping(value = "/search/getByEmail")
+    public Kompanija getByEmail(@RequestParam String email) {
+        return kompanijaRepository.findByEmail(email);
+    }
+
+    @RequestMapping(value = "/search/getByAdresa")
+    public Kompanija getByAdresa(@RequestParam String adresa) {
+        return kompanijaRepository.findByAdresa(adresa);
+    }
+
     @RequestMapping(value = "/{id}")
     public Kompanija get(@PathVariable Long id) {
         Kompanija k = kompanijaRepository.findOne(id);
