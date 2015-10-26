@@ -23,8 +23,8 @@ public class OglasKompanije implements Serializable {
     private String oglas;
     private String naziv;
 
+    @JoinColumn(name = "id_kompanije", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Kompanija kompanija;
 
     public OglasKompanije() {

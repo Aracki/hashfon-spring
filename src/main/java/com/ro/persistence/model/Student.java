@@ -64,6 +64,7 @@ public class Student implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public List<Snippet> getSnippets() {
         return snippets;
     }

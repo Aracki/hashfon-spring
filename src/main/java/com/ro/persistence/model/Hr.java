@@ -25,8 +25,8 @@ public class Hr implements Serializable {
     private String prezime;
     private String token;
 
+    @JoinColumn(name = "id_kompanije", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Kompanija kompanija;
 
     public Hr() {
