@@ -36,7 +36,7 @@ public class OglasKompanijeRestController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public OglasKompanije insert(OglasKompanije oglasKompanije) {
+    public OglasKompanije create(OglasKompanije oglasKompanije) {
         oglasKompanijeRepository.save(oglasKompanije);
         return oglasKompanije;
     }

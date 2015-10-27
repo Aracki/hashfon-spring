@@ -3,10 +3,7 @@ package com.ro.controller.api;
 import com.ro.persistence.model.Snippet;
 import com.ro.persistence.repositories.SnippetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,18 @@ public class SnippetRestController {
     public List<Snippet> getByIdStudent(@RequestParam Long idStudent) {
         return snippetRepository.findByIdStudent(idStudent);
 
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public Snippet create(Snippet snippet) {
+        snippetRepository.save(snippet);
+        return snippet;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public Snippet update(Snippet snippet) {
+        snippetRepository.save(snippet);
+        return snippet;
     }
 
 }

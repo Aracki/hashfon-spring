@@ -4,10 +4,7 @@ import com.ro.persistence.model.Student;
 import com.ro.persistence.repositories.StudentRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -44,11 +41,6 @@ public class StudentRestController {
         return studentRepository.findByPrezime(prezime);
     }
 
-//    @RequestMapping(value = "/{password}")
-//    public List<Student> getByPassword(@PathVariable String password) {
-//        return studentRepository.findByPassword(password);
-//    }
-
     @RequestMapping(value = "/search/getByTelefon")
     public Student getByTelefon(@RequestParam String telefon) {
         return studentRepository.findByTelefon(telefon);
@@ -77,6 +69,18 @@ public class StudentRestController {
     @RequestMapping(value = "/search/getByGodinaDiplomiranja")
     public List<Student> getByGodinaDiplomiranja(@RequestParam Integer godinaDiplomiranja) {
         return studentRepository.findByGodinaDiplomiranja(godinaDiplomiranja);
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public Student create(Student student) {
+        studentRepository.save(student);
+        return student;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public Student udpate(Student student) {
+        studentRepository.save(student);
+        return student;
     }
 
 }
