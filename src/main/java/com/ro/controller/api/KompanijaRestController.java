@@ -44,14 +44,8 @@ public class KompanijaRestController {
         return kompanijaRepository.findByAdresa(adresa);
     }
 
-    @RequestMapping(value = "/{id}")
-    public Kompanija get(@PathVariable Long id) {
-        Kompanija k = kompanijaRepository.findOne(id);
-        return k;
-    }
-
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public Kompanija insert(Kompanija k) {
+    public Kompanija create(Kompanija k) {
         kompanijaRepository.save(k);
         return k;
     }

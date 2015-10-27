@@ -59,7 +59,7 @@ public class HrRestController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public Hr insert(Hr hr) {
+    public Hr create(Hr hr) {
         hrRepository.save(hr);
         return hr;
     }
