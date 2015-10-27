@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
         classpath('io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE')
+        classpath("org.springframework:springloaded:1.2.4.RELEASE")
     }
 }
 
@@ -37,9 +38,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-mustache')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-starter-logging')
-    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.4.1'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.4.1'
+
     runtime('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
@@ -51,6 +50,31 @@ eclipse {
          containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
     }
 }
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/")
+    }
+}
+
+
+configurations { springLoaded }
+dependencies {
+    springLoaded("org.springframework:springloaded:1.2.4.RELEASE")
+}
+
+bootRun {
+
+    def springLoadedFile = configurations.springLoaded.find
+            { it.name == "springloaded-1.2.4.RELEASE.jar" }
+
+    systemProperty 'server.port', '8080'
+    systemProperty 'spring.profiles.active', 'mysql'
+    jvmArgs "-javaagent:$springLoadedFile", "-noverify"
+    main = 'com.ro.HashfonSpringApplication'
+}
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.7'
