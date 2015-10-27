@@ -232,9 +232,9 @@ $('#logOut').click(function () {
     }
 });
 
-function napuniInfoK() {
+function napuniInfoK(id) {
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/kompanija/ja',
+        url: 'http://localhost:8080/api/resources/kompanija/search/getById/' + id,
         dataType: 'json',
         headers: {
             'Content-Type': 'application/json',

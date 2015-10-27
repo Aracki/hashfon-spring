@@ -138,7 +138,7 @@ function napuniSidebarKompanije(kompanije) {
         var li = document.createElement('li');
         // li.addClass('xx');
         var a = document.createElement('a');
-        a.href = "kompanija.html?name=" + kompanije[o].id;
+        a.href = "s_kompanija_profil?name=" + kompanije[o].id;
         a.innerHTML = kompanije[o].ime;
 
         // li.innerHTML = kompanije[k].ime;
