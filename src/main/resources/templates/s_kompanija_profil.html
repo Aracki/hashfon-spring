@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
-    <title>Profil kompanije</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link href="css/profil.css" rel="stylesheet">
-</head>
+    <title>Kompanija</title>
 
-<body onload="napuniInfoK(); napuniOglaseInfo();">
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/s_kompanija_profil.css" rel="stylesheet">
+
+</head>
+<body onload="vratiKompaniju(); ">
+
+<h2>Kompanija</h2>
 
 
 <div class="navbar navbar-red navbar-static-top">
@@ -23,15 +23,11 @@
 
 
         <li>
-            <a href="kompanija_profil.html" id="glava"><i class="glyphicon glyphicon-user"></i> Profil</a>
-        </li>
-
-        <li>
-            <a id="logOut"><i class="glyphicon glyphicon-log-out"></i> Odjavi se</a>
+            <a href="student_profil.html" id="glava"><i class="glyphicon glyphicon-user"></i> Profil</a>
         </li>
 
     </ul>
-    <h2>#fon - kompanija</h2>
+    <h2>Iteh #fon - kompanija</h2>
 </div>
 
 
@@ -44,11 +40,13 @@
         <div class="col-sm-5">
 
             <div class="panel panel-default" id="slika_div">
-                <div class="panel-thumbnail">
+                <div class="panel-thumbnail" id="slikaK">
                     <img src="assets/img/images.jpg" class="img-responsive">
                 </div>
                 <div class="panel-body">
-                    <p class="lead" id="imeKomp">Microsoft</p>
+                    <p class="lead" id="ime"></p>
+
+                    <p>13 Oglasa</p>
 
 
                     <i class="glyphicon glyphicon-user"></i>
@@ -65,7 +63,7 @@
             <div class="panel panel-default" id="profil">
                 <div class="panel-heading"><a id="editStudent" href="#" class="pull-right"><i
                         class="glyphicon glyphicon-pencil"></i></a>
-                    <h4>Informacije o kompaniji</h4>
+                    <h4>Informacije o studentu</h4>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
@@ -75,7 +73,7 @@
                                 Email :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                             <div class="ext-right">
-                                <p class="ext-name" id="emailk"></p>
+                                <p class="ext-name" id="email">microsoft@gmail.com</p>
 
                             </div>
                         </li>
@@ -85,7 +83,7 @@
                                 Adresa :&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                             <div class="ext-right">
-                                <p class="ext-name" id="adresak"></p>
+                                <p class="ext-name" id="adresa"> dassadsdadsa 321</p>
 
                             </div>
                         </li>
@@ -93,8 +91,8 @@
                         <br>
 
                         <div class="form-group">
-                            <label class="editable" id="miniNaslov" for="comment">Opis :</label>
-                            <textarea class="form-control" rows="5" id="opisk"></textarea>
+                            <label class="editable" for="comment">Opis :</label>
+                            <textarea class="form-control" rows="5" id="miniNaslov"></textarea>
                         </div>
 
 
@@ -107,28 +105,35 @@
     </div>
     <!--/row-->
 
-    <div class="well">
-        <form class="form-horizontal" role="form">
-            <h4>Dodaj novi oglas:</h4>
-
-            <div class="form-group" style="padding:14px;">
-                <input type="text" name="tagovi" id="naziv" value="" class="form-control" placeholder="Naziv oglasa">
-                <br>
-                <textarea class="form-control" id="oglas" placeholder="Tekst oglasa"></textarea>
-            </div>
-            <button class="btn btn-primary pull-right" id="objavi_dugme" type="button">Objavi oglas</button>
-            <br>
-        </form>
-    </div>
-    <br>
 
     <h1>Oglasi: </h1>
     <br>
     <br>
     <br>
+    <br>
 
-    <div row="rowOglasi" id="rowOglasi">
+    <div class="panel panel-default" id="snipet">
+        <div class="panel-heading">
+            <h4>Oglas 1</h4>
+        </div>
+        <div class="panel-body">
 
+            <div class="container">
+                <div class="row-fluid">
+                    <div class="span6 col-md-6" style="padding-right:20px; border-right: 1px solid #ccc; height:150px;">
+                        <p>Tekst oglasa</p>
+                    </div>
+
+                    <div class="span6 col-md-6">
+                        <p>Link ka kompaniji</p> <a href="https://github.com/Aracki/hashfon">https://github.com/Aracki/hashfon</a>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
     </div>
 
 
@@ -137,10 +142,8 @@
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/k_main.js"></script>
 
-<!-- <script type="text/javascript" src="assets/js/profil.js"></script> -->
-
+<script type="text/javascript" src="js/s_main.js"></script>
 </body>
-
 </html>
