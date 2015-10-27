@@ -112,9 +112,9 @@ function refreshInfo() {
 
 $('#srch').click(function () {
     var oglas = $('#srch-term').val();
-    // par = par.substring(1);
+    //var par = oglas.substring(1);
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/oglasi?search=' + oglas,
+        url: 'http://localhost:8080/api/resources/oglasKompanije/search/getOglasKompanije?search=' + oglas,
         dataType: 'json',
         success: function (response) {
             // alert(JSON.stringify(response));
@@ -260,7 +260,7 @@ function napuniKompaniju(k) {
 
 function napuniVestiOglasa() {
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/oglasi',
+        url: 'http://localhost:8080/api/resources/oglasKompanije',
         dataType: 'json',
         headers: {
             'Content-Type': 'application/json',

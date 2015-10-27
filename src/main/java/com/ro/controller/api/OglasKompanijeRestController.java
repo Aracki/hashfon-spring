@@ -1,5 +1,6 @@
 package com.ro.controller.api;
 
+import com.ro.persistence.model.Kompanija;
 import com.ro.persistence.model.OglasKompanije;
 import com.ro.persistence.model.OglasKompanijePk;
 import com.ro.persistence.repositories.OglasKompanijeRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import java.util.List;
 
 /**
@@ -45,5 +47,10 @@ public class OglasKompanijeRestController {
     public OglasKompanije update(OglasKompanije oglasKompanije) {
         oglasKompanijeRepository.save(oglasKompanije);
         return oglasKompanije;
+    }
+
+    @RequestMapping(value = "/search/getOglasKompanije")
+    public List<Kompanija> getOglasKompanije(@RequestParam String search) {
+        return oglasKompanijeRepository.findByOglasKompanije(search);
     }
 }
