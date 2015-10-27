@@ -49,7 +49,7 @@ $('#srch').click(function () {
     var par = $('#srch-term').val();
     par = par.substring(1);
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/student?search=' + par,
+        url: 'http://localhost:8080/api/resources/student/search/getByTagName?search=' + par,
         dataType: 'json',
         success: function (response) {
             napuniSideBarKompanija(response);
@@ -259,17 +259,13 @@ function napuniOglaseInfo() {
             'Content-Type': 'application/json',
             'Authorization': getCookie('token')
         },
-
         success: function (response) {
             var oglasi = response;
             var oglashtml = "";
             for (var i = 0; i < oglasi.length; i++) {
                 var idoglas = oglasi[i].oglasKompanijePK.id;
                 oglashtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '<button class="btn btn-danger" id="XXX' + idoglas + '"' + ' <h4></a>' + oglasi[i].naziv + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p> ' + oglasi[i].oglas + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + oglasi[i].kompanija.ime + '</div>' + '</div>';
-
-
             }
-
             $('#rowOglasi').html(oglashtml);
         }
     });
@@ -340,7 +336,7 @@ function getCookie(cname) {
 
 function napuniPocetnuKompanija() {
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/snipet',
+        url: 'http://localhost:8080/api/resources/snippet',
         dataType: 'json',
         headers: {
             'Content-Type': 'application/json',
@@ -352,7 +348,7 @@ function napuniPocetnuKompanija() {
             var snipethtml = "";
             for (var i = 0; i < snipeti.length; i++) {
 
-                snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '<a href="k_student_profil.html?name="' + snipeti[i].student.id + ' <h4 id="ime_prezime"></a>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="snipet"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr> #' + snipeti[i].idHash.tag + '</div>' + '</div>';
+                snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '<a href="k_student_profil.html?name="' + snipeti[i].student.id + ' <h4 id="ime_prezime"></a>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="snipet"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr> #' + snipeti[i].hash.tag + '</div>' + '</div>';
                 // $('#ime_prezime').innerHTML = snipeti[i].student;
             }
             $('#redSnipeta').html(snipethtml);
