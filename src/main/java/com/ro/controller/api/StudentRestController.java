@@ -4,6 +4,7 @@ import com.ro.persistence.model.Student;
 import com.ro.persistence.repositories.StudentRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -69,6 +70,15 @@ public class StudentRestController {
     @RequestMapping(value = "/search/getByGodinaDiplomiranja")
     public List<Student> getByGodinaDiplomiranja(@RequestParam Integer godinaDiplomiranja) {
         return studentRepository.findByGodinaDiplomiranja(godinaDiplomiranja);
+    }
+
+    @RequestMapping(value = "/search/getByTagName")
+    public List<Student> getByTag(@Param("search") String search) {
+        if (search != null) {
+            return studentRepository.findBySnippetTag(search);
+        } else {
+            return null;
+        }
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
