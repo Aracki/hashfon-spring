@@ -237,7 +237,7 @@ function vratiKompaniju() {
     var idK = str[1];
 
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/kompanija/' + idK,
+        url: 'http://localhost:8080/api/resources/kompanija/search/getById?id=' + idK,
         dataType: 'json',
         success: function (response) {
             napuniKompaniju(response);

@@ -253,7 +253,7 @@ function napuniInfoK(id) {
 
 function napuniOglaseInfo() {
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/oglasi/ja',
+        url: 'http://localhost:8080/api/resources/hashfon/rest/oglasi/ja',
         dataType: 'json',
         headers: {
             'Content-Type': 'application/json',
