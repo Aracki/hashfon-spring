@@ -281,38 +281,40 @@ function napuniVestiOglasa() {
 
 }
 
-function napuniSnipete() {
-    $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/snipet/ja',
-        dataType: 'json',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': getCookie('token')
-        },
+//function napuniSnipete() {
+//    $.ajax({
+//        url: 'http://192.168.186.52:8080/hashfon/rest/snipet/ja',
+//        dataType: 'json',
+//        headers: {
+//            'Content-Type': 'application/json',
+//            'Authorization': getCookie('token')
+//        },
+//
+//        success: function (response) {
+//            var snipeti = response;
+//            var snipethtml = "";
+//            for (var i = 0; i < snipeti.length; i++) {
+//                snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '' + snipeti[i].idHash.tag + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="code"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</div>' + '</div>';
+//            }
+//            // alert(snipethtml);
+//            $('#rowSnipeti').html(snipethtml);
+//        }
+//    });
+//}
 
-        success: function (response) {
-            var snipeti = response;
-            var snipethtml = "";
-            for (var i = 0; i < snipeti.length; i++) {
-                snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '' + snipeti[i].idHash.tag + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="code"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</div>' + '</div>';
-            }
-            // alert(snipethtml);
-            $('#rowSnipeti').html(snipethtml);
-        }
-    });
-}
-
-
+//napuni profil studenta
 function napuniProfil() {
-    // alert(getCookie('token'));
+    var idStudenta = location.search.split('id=')[1];
+    alert(idStudenta);
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/student/ja',
+        url: 'http://localhost:8080/api/resources/student/search/getById?id=' + idStudenta,
         dataType: 'json',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getCookie('token')
         },
         success: function (response) {
+            alert(response);
             var date = new Date(response.datumRodjenja);
             var d = date.getUTCDate() + 1;
             var m = date.getUTCMonth() + 1;
