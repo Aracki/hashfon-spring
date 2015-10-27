@@ -82,5 +82,4 @@ public class StudentRestController {
         studentRepository.save(student);
         return student;
     }
-
 }
