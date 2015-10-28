@@ -9,15 +9,19 @@ $('#objavi_dugme').click(function () {
 
     var naz = $('#naziv').val();
     var ogl = $('#oglas').val();
-
     var string = {
         naziv: naz,
-        oglas: ogl
+        oglas: ogl,
+        oglasKompanijePk: {
+            idKompanije: 3
+        }
     };
 
     var json = JSON.stringify(string);
+    alert(json);
+
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/oglasi',
+        url: 'http://localhost:8080/api/resources/oglasKompanije',
         dataType: 'json',
         method: 'POST',
         data: json,
@@ -26,11 +30,9 @@ $('#objavi_dugme').click(function () {
             'Authorization': getCookie('token')
         },
         success: function (response) {
-
-
+            alert("Uspesan insert!");
         }
     });
-
     refreshOglase();
 });
 
@@ -39,10 +41,7 @@ function refreshOglase() {
     var id = 0;
     id = window.setInterval(napuniOglaseInfo, 100);
     window.clearInterval(id);
-
-
 }
-
 
 $('#srch').click(function () {
     var par = $('#srch-term').val();
@@ -60,12 +59,6 @@ $('#srch').click(function () {
     });
 
 });
-//za enter
-// document.onkeydown = function (evt) {
-//     if(evt.keyCode == 13){
-//         $("#logIn").click();
-//     }
-// };
 
 // var json_token;
 var emailtoken;
@@ -231,9 +224,9 @@ $('#logOut').click(function () {
     }
 });
 
-function napuniInfoK(id) {
+function napuniInfoK() {
     $.ajax({
-        url: 'http://localhost:8080/api/resources/kompanija/search/getById/' + id,
+        url: 'http://localhost:8080/api/resources/kompanija/search/getById?id=' + 2,
         dataType: 'json',
         headers: {
             'Content-Type': 'application/json',
@@ -252,7 +245,7 @@ function napuniInfoK(id) {
 
 function napuniOglaseInfo() {
     $.ajax({
-        url: 'http://localhost:8080/api/resources/hashfon/rest/oglasi/ja',
+        url: 'http://localhost:8080/api/resources/oglasKompanije/search/getByIdKompanije?idKompanije= ' + 2,
         dataType: 'json',
         headers: {
             'Content-Type': 'application/json',
@@ -262,7 +255,7 @@ function napuniOglaseInfo() {
             var oglasi = response;
             var oglashtml = "";
             for (var i = 0; i < oglasi.length; i++) {
-                var idoglas = oglasi[i].oglasKompanijePK.id;
+                var idoglas = oglasi[i].oglasKompanijePk.id;
                 oglashtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '<button class="btn btn-danger" id="XXX' + idoglas + '"' + ' <h4></a>' + oglasi[i].naziv + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p> ' + oglasi[i].oglas + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + oglasi[i].kompanija.ime + '</div>' + '</div>';
             }
             $('#rowOglasi').html(oglashtml);
@@ -276,23 +269,22 @@ $(function () {
         var id = jQuery(this).attr("id");
         var niz = id.split('XXX');
         var id1 = niz[1];
-        // alert(id1);
+        alert(id1);
 
         var r = confirm("Da li si siguran/a?");
         if (r === true) {
 
             $.ajax({
-                url: 'http://192.168.186.52:8080/hashfon/rest/oglasi/' + id1,
-                dataType: 'json',
-                method: 'DELETE',
+                url: 'http://localhost:8080/api/resources/oglasKompanije/' + id1,
+                //dataType: 'json',
+                method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': getCookie('token')
                 },
-
                 success: function (response) {
-
                     alert("Uspesno!");
+                    refreshOglase();
                 }
             });
 
