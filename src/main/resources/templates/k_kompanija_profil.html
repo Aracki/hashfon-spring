@@ -39,7 +39,6 @@
 
     <!-- content -->
     <div class="row">
-
         <!-- main col left -->
         <div class="col-sm-5">
 
@@ -49,34 +48,28 @@
                 </div>
                 <div class="panel-body">
                     <p class="lead" id="imeKomp">Microsoft</p>
-
-
                     <i class="glyphicon glyphicon-user"></i>
-
                 </div>
             </div>
-
-
         </div>
 
         <!-- main col right -->
         <div class="col-sm-7">
-
             <div class="panel panel-default" id="profil">
-                <div class="panel-heading"><a id="editStudent" href="#" class="pull-right"><i
-                        class="glyphicon glyphicon-pencil"></i></a>
+                <div class="panel-heading">
+                    <a id="editKompanija" href="#" class="pull-right"><i
+                            class="glyphicon glyphicon-pencil" data-toggle="modal"
+                            data-target=".bs-example-modal-lg"></i></a>
                     <h4>Informacije o kompaniji</h4>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-
                         <li class="list-group-item editable">
                             <div class="ext-left">
                                 Email :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                             <div class="ext-right">
                                 <p class="ext-name" id="emailk"></p>
-
                             </div>
                         </li>
 
@@ -91,18 +84,13 @@
                         </li>
 
                         <br>
-
                         <div class="form-group">
-                            <label class="editable" id="miniNaslov" for="comment">Opis :</label>
+                            <label class="editable" id="miniNaslov">Opis :</label>
                             <textarea class="form-control" rows="5" id="opisk"></textarea>
                         </div>
-
-
                     </ul>
                 </div>
             </div>
-
-
         </div>
     </div>
     <!--/row-->
@@ -132,6 +120,66 @@
     </div>
 
 
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend>Izmeni podatke</legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Email :</label>
+
+                        <div class="col-md-4">
+                            <input id="emailUpdate" name="email" type="text" placeholder="Email"
+                                   class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Adresa :</label>
+
+                        <div class="col-md-4">
+                            <input id="adresaUpdate" name="adresa" type="text" placeholder="Adresa"
+                                   class="form-control input-md">
+
+                        </div>
+                    </div>
+
+
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="opis">Opis: </label>
+
+                        <div class="col-md-4">
+                                        <textarea class="form-control" id="opis"
+                                                  name="opis"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="updateKompanija"></label>
+
+                        <div class="col-md-4">
+                            <button id="updateKompanija" type="button" class="btn btn-primary">Sacuvaj
+                                promene
+                            </button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
 </div>
 
 

@@ -13,7 +13,7 @@ $('#objavi_dugme').click(function () {
         naziv: naz,
         oglas: ogl,
         oglasKompanijePk: {
-            idKompanije: 3
+            idKompanije: 2
         }
     };
 
@@ -345,8 +345,6 @@ function napuniPocetnuKompanija() {
             $('#redSnipeta').html(snipethtml);
         }
     });
-
-
 }
 
 
@@ -371,6 +369,40 @@ function napuniSnipete(id) {
         }
     });
 }
+
+$('#updateKompanija').click(function () {
+
+    var jsonObj = {
+        email: $('#emailUpdate').val(),
+        adresa: $('#adresaUpdate').val(),
+        opis: $('#opis').val(),
+        id: 3
+    };
+
+    var jsonText = JSON.stringify(jsonObj);
+
+    $.ajax({
+        url: 'http://localhost:8080/api/resources/kompanija',
+        dataType: 'json',
+        method: 'PUT',
+        data: jsonText,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getCookie('token')
+        },
+        success: function (response) {
+            alert('Uspesno ste editovali kompaniju!');
+            this.close();
+            //refreshInfo();
+        },
+        error: function (response) {
+            alert('Greska > ' + response);
+            //refreshInfo();
+            this.close();
+        }
+
+    });
+});
 
 
 $(document).ready(function () {

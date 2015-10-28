@@ -2,7 +2,9 @@ package com.ro.controller.api;
 
 import com.ro.persistence.model.Kompanija;
 import com.ro.persistence.repositories.KompanijaRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.PathParam;
@@ -15,6 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/resources/kompanija")
 public class KompanijaRestController {
+
+    private static final Logger logger = Logger.getLogger(KompanijaRestController.class);
 
     @Autowired
     KompanijaRepository kompanijaRepository;
@@ -50,9 +54,18 @@ public class KompanijaRestController {
         return k;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.PUT)
-    public Kompanija update(Kompanija k) {
-        kompanijaRepository.save(k);
-        return k;
+    @RequestMapping(value = "", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Kompanija update(@RequestBody Kompanija k) {
+        try {
+            logger.info("***** Podaci kompanije za update ****** " + k);
+            Kompanija kompanijaZaUpdate = kompanijaRepository.findById(k.getId());
+            kompanijaZaUpdate.setAdresa(k.getAdresa());
+            kompanijaZaUpdate.setEmail(k.getEmail());
+            kompanijaZaUpdate.setOpis(k.getOpis());
+            kompanijaRepository.save(kompanijaZaUpdate);
+            return k;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
