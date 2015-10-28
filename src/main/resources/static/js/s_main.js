@@ -93,7 +93,7 @@ $('#post_dugme').click(function () {
             'Authorization': getCookie('token')
         },
         success: function (response) {
-            alert(response);
+            location.reload();
         }
 
     });

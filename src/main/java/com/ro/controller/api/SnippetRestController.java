@@ -53,7 +53,7 @@ public class SnippetRestController {
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Snippet create(@RequestBody Snippet snippet) {
-        System.out.println(snippet.toString());
+        System.out.println(snippet);
 
         try{
             Hash hash = (Hash) hashRepository.findByTag(snippet.getHash().getTag());
@@ -63,7 +63,7 @@ public class SnippetRestController {
             hashRepository.save(snippet.getHash());
         }
 
-        Student s = studentRepository.findById(Long.parseLong("1"));
+        Student s = (Student) studentRepository.findById(Long.parseLong("1"));
         snippet.setStudent(s);
         SnippetPk pk = new SnippetPk();
         pk.setIdStudent(s.getId());
