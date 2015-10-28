@@ -1,10 +1,14 @@
 package com.ro.controller.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ro.persistence.model.Snippet;
 import com.ro.persistence.repositories.SnippetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import javax.ws.rs.Consumes;
 import java.util.List;
 
 /**
@@ -34,10 +38,18 @@ public class SnippetRestController {
 
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public Snippet create(Snippet snippet) {
-        snippetRepository.save(snippet);
-        return snippet;
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String create(@RequestParam String json) {
+        System.out.println(json);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            Snippet snippet = mapper.readValue(json, Snippet.class);
+            System.out.println(snippet.toString());
+            snippetRepository.save(snippet);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Success";
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)

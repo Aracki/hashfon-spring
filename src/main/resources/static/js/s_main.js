@@ -75,8 +75,11 @@ $('#post_dugme').click(function () {
     var snp = $('#kod').val();
 
     var string = {
+        id: {
+            idStudenta: 1
+        },
         code: snp,
-        idHash: {
+        hash: {
             tag: t
         }
     };
@@ -84,7 +87,7 @@ $('#post_dugme').click(function () {
     var json = JSON.stringify(string);
     alert(json);
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/snipet',
+        url: 'http://localhost:8080/api/resources/snippet',
         dataType: 'json',
         method: 'POST',
         data: json,
@@ -304,27 +307,6 @@ function napuniVestiOglasa() {
 
 }
 
-//function napuniSnipete() {
-//    $.ajax({
-//        url: 'http://192.168.186.52:8080/hashfon/rest/snipet/ja',
-//        dataType: 'json',
-//        headers: {
-//            'Content-Type': 'application/json',
-//            'Authorization': getCookie('token')
-//        },
-//
-//        success: function (response) {
-//            var snipeti = response;
-//            var snipethtml = "";
-//            for (var i = 0; i < snipeti.length; i++) {
-//                snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '' + snipeti[i].idHash.tag + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="code"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</div>' + '</div>';
-//            }
-//            // alert(snipethtml);
-//            $('#rowSnipeti').html(snipethtml);
-//        }
-//    });
-//}
-
 //napuni profil studenta
 function napuniProfil() {
     var idStudenta = location.search.split('id=')[1];
@@ -351,6 +333,56 @@ function napuniProfil() {
 
             $('#datumR').html('Datum rodjenja : ' + d + "." + m + "." + y + ".");
 
+        }
+    });
+}
+
+function napuniProfilStudenta() {
+    var idStudenta = 1;
+    $.ajax({
+        url: 'http://localhost:8080/api/resources/student/search/getById?id=' + idStudenta,
+        dataType: 'json',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getCookie('token')
+        },
+        success: function (response) {
+            var date = new Date(response.datumRodjenja);
+            var d = date.getUTCDate() + 1;
+            var m = date.getUTCMonth() + 1;
+            var y = date.getFullYear();
+            $('#ime').html(response.ime + ' ' + response.prezime);
+            $('#email').html(response.email);
+            $('#fon').html(response.telefon);
+            $('#adresa').html(response.adresa);
+            $('#comment').html(response.dodatneInformacije);
+            $('#godD').html('Godina diplomiranja : ' + response.godinaDiplomiranja);
+
+            $('#datumR').html('Datum rodjenja : ' + d + "." + m + "." + y + ".");
+
+        }
+    });
+}
+
+function napuniSnipeteStudenta() {
+    var id = 1;
+    $.ajax({
+        url: 'http://localhost:8080/api/resources/snippet/search/getByIdStudent?idStudent=' + id,
+        dataType: 'json',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getCookie('token')
+        },
+
+        success: function (response) {
+
+
+            var snipeti = response;
+            var snipethtml = "";
+            for (var i = 0; i < snipeti.length; i++) {
+                snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '' + snipeti[i].hash.tag + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="code"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</div>' + '</div>';
+            }
+            $('#rowSnipeti').html(snipethtml);
         }
     });
 }

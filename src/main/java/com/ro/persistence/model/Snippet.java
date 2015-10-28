@@ -1,5 +1,6 @@
 package com.ro.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 import javax.persistence.*;
@@ -16,14 +17,18 @@ public class Snippet implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonProperty("id.idStudenta")
     @EmbeddedId
     protected SnippetPk snippetPk;
+    @JsonProperty("code")
     private String code;
+
 
     @JoinColumn(name = "id_student", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Student student;
 
+    @JsonProperty("hash")
     @JoinColumn(name = "id_hash", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Hash hash;
