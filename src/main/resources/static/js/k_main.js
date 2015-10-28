@@ -232,13 +232,11 @@ function napuniInfoK() {
             'Content-Type': 'application/json',
             'Authorization': getCookie('token')
         },
-
         success: function (response) {
-
             $('#imeKomp').html(response.ime);
             $('#emailk').html(response.email);
             $('#adresak').html(response.adresa);
-            $('#opisk').html(response.opis);
+            $('#opisk').html(response.opis).prop("readonly", "readonly");
         }
     });
 }
