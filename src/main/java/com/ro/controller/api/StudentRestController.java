@@ -5,6 +5,7 @@ import com.ro.persistence.repositories.StudentRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -22,7 +23,7 @@ public class StudentRestController {
     @Autowired
     StudentRepository studentRepository;
 
-    @RequestMapping(value = "")
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Student> getAll() {
         return studentRepository.findAll();
     }
@@ -87,9 +88,34 @@ public class StudentRestController {
         return student;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @RequestMapping(value = "", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Student update(@RequestBody Student student) {
-        studentRepository.save(student);
-        return student;
+        logger.info("********** Podaci studenta za update ********** " + student);
+        Student s = studentRepository.findById(student.getId());
+
+        if(!student.getAdresa().equals("")) {
+            s.setAdresa(student.getAdresa());
+        }
+        if (!student.getDodatneInformacije().equals("")) {
+            s.setDodatneInformacije(student.getDodatneInformacije());
+        }
+        if (!student.getEmail().equals("")) {
+            s.setEmail(student.getEmail());
+        }
+        if (!student.getPassword().equals("")) {
+            s.setPassword(student.getPassword());
+        }
+        if (!student.getSlika().equals("")) {
+            s.setSlika(student.getSlika());
+        }
+        if (student.getGodinaDiplomiranja() != null && student.getGodinaDiplomiranja() != 0) {
+            s.setGodinaDiplomiranja(student.getGodinaDiplomiranja());
+        }
+        if (!student.getTelefon().equals("")){
+            s.setTelefon(student.getTelefon());
+        }
+
+        studentRepository.save(s);
+        return s;
     }
 }

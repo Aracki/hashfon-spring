@@ -20,7 +20,8 @@ $('#sacuvajButton').click(function () {
         dodatneInformacije: $('#dodatneInformacije').val(),
         adresa: $('#adresaUpdate').val(),
         telefon: fon,
-        slika: ' '
+        slika: ' ',
+        id: 1
     };
 
     var jsonObj = JSON.stringify(string);
