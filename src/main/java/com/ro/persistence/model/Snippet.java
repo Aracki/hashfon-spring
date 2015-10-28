@@ -17,10 +17,8 @@ public class Snippet implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("id.idStudenta")
     @EmbeddedId
     protected SnippetPk snippetPk;
-    @JsonProperty("code")
     private String code;
 
 
@@ -28,7 +26,6 @@ public class Snippet implements Serializable {
     @ManyToOne(optional = false)
     private Student student;
 
-    @JsonProperty("hash")
     @JoinColumn(name = "id_hash", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Hash hash;
