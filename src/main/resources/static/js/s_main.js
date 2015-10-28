@@ -75,9 +75,6 @@ $('#post_dugme').click(function () {
     var snp = $('#kod').val();
 
     var string = {
-        id: {
-            idStudenta: 1
-        },
         code: snp,
         hash: {
             tag: t

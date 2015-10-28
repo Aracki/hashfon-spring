@@ -28,6 +28,9 @@ public class SnippetPk implements Serializable {
         this.id = id;
         this.idStudent = idStudent;
     }
+    public SnippetPk(long idStudent) {
+        this.idStudent = idStudent;
+    }
 
     public long getIdStudent() {
         return idStudent;
