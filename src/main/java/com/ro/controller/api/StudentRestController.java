@@ -88,7 +88,7 @@ public class StudentRestController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)
-    public Student udpate(Student student) {
+    public Student update(@RequestBody Student student) {
         studentRepository.save(student);
         return student;
     }

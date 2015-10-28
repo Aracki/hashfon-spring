@@ -4,6 +4,7 @@ $('#logIn').click(function () {
 
 $('#sacuvajButton').click(function () {
 
+    var emailUpdate = $('#emailUpdate').val();
     var loz1 = $('#lozinka1').val();
     var loz2 = $('#lozinka2').val();
     var fon = $('#fonn').val();
@@ -13,7 +14,7 @@ $('#sacuvajButton').click(function () {
     }
 
     var string = {
-        email: loz1,
+        email: emailUpdate,
         password: loz2,
         godinaDiplomiranja: $('#godinaDiplomiranja').val(),
         dodatneInformacije: $('#dodatneInformacije').val(),
@@ -25,7 +26,7 @@ $('#sacuvajButton').click(function () {
     var jsonObj = JSON.stringify(string);
 
     $.ajax({
-        url: 'http://192.168.186.52:8080/hashfon/rest/student',
+        url: 'http://localhost:8080/api/resources/student',
         dataType: 'json',
         method: 'PUT',
         data: jsonObj,
@@ -63,7 +64,6 @@ $('#logOut').click(function () {
 
 
                 window.location.href = "../index.html";
-                // alert(getCookie('token'));
             }
 
         });
@@ -117,8 +117,6 @@ $('#srch').click(function () {
         url: 'http://localhost:8080/api/resources/oglasKompanije/search/getOglasKompanije?search=' + oglas,
         dataType: 'json',
         success: function (response) {
-            // alert(JSON.stringify(response));
-            // $('.xx').remove();
             napuniSidebarKompanije(response);
         },
         headers: {
@@ -129,23 +127,50 @@ $('#srch').click(function () {
 
 });
 
+$(function () {
+    $(document).on('click', '[id^=XX]', function () {
+
+        var id = jQuery(this).attr("id");
+        var niz = id.split('XX');
+        var id1 = niz[1];
+
+        var r = confirm("Da li si siguran/a?");
+        if (r === true) {
+
+            $.ajax({
+                url: 'http://localhost:8080/api/resources/snippet/' + id1,
+                //dataType: 'json',
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': getCookie('token')
+                },
+                success: function (response) {
+                    alert("Uspesno obrisan snippet!");
+                    location.reload();
+                }
+            });
+
+        }
+        location.reload();
+    });
+});
+
+$('[id^="XXX"]').each(function () {
+});
+
 function napuniSidebarKompanije(kompanije) {
     var lista = document.getElementById('lg-menu');
     lista.innerHTML = '';
     for (var o in kompanije) {
-
-        // alert();
         var li = document.createElement('li');
         // li.addClass('xx');
         var a = document.createElement('a');
         a.href = "s_kompanija_profil?name=" + kompanije[o].id;
         a.innerHTML = kompanije[o].ime;
 
-        // li.innerHTML = kompanije[k].ime;
-
         li.appendChild(a);
         lista.appendChild(li);
-        // lista.append('<li><a href="sdasad.com"></a></li>')
 
     }
 
@@ -194,17 +219,13 @@ function napuniSideBar() {
 
     var lista = document.getElementById('lg-menu');
     for (var k in kompanije) {
-        // alert();
         var li = document.createElement('li');
         var a = document.createElement('a');
         a.href = "kompanija.html?name=" + kompanije[k].id;
         a.innerHTML = kompanije[k].ime;
 
-        // li.innerHTML = kompanije[k].ime;
-
         li.appendChild(a);
         lista.appendChild(li);
-        // lista.append('<li><a href="sdasad.com"></a></li>')
 
     }
 }
@@ -222,11 +243,6 @@ function searchKompanije() {
             xhr.setRequestHeader('Authorization', getCookie('token'));
         },
     });
-
-    // $.getJSON('http://192.168.186.52:8080/hashfon/rest/kompanija',  function(json, textStatus) {
-    //     /*optional stuff to do after success */
-    //     alert(json);
-    // });
 }
 
 
@@ -377,7 +393,8 @@ function napuniSnipeteStudenta() {
             var snipeti = response;
             var snipethtml = "";
             for (var i = 0; i < snipeti.length; i++) {
-                snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '' + snipeti[i].hash.tag + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="code"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</div>' + '</div>';
+                var idSnipet = snipeti[i].snippetPk.id;
+                snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '<button class="btn btn-danger" id="XX' + idSnipet + '"' + ' <h4></a>' + snipeti[i].hash.tag + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="code"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</div>' + '</div>';
             }
             $('#rowSnipeti').html(snipethtml);
         }
@@ -389,3 +406,4 @@ $(document).ready(function () {
     napuniVestiOglasa();
 
 });
+

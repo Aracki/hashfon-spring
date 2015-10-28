@@ -71,6 +71,11 @@ public class SnippetRestController {
         return snippetRepository.save(snippet);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable Long id) {
+        snippetRepository.delete(snippetRepository.findById(id));
+    }
+
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public Snippet update(Snippet snippet) {
         snippetRepository.save(snippet);
