@@ -4,11 +4,11 @@ import com.ro.persistence.model.Kompanija;
 import com.ro.persistence.model.OglasKompanije;
 import com.ro.persistence.model.OglasKompanijePk;
 import com.ro.persistence.repositories.OglasKompanijeRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 import java.util.List;
 
 /**
@@ -18,6 +18,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/resources/oglasKompanije")
 public class OglasKompanijeRestController {
+
+    public static final Logger LOGGER = Logger.getLogger(OglasKompanijeRestController.class);
 
     @Autowired
     OglasKompanijeRepository oglasKompanijeRepository;
@@ -37,8 +39,11 @@ public class OglasKompanijeRestController {
         return oglasKompanijeRepository.findByIdKompanije(idKompanije);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public OglasKompanije create(OglasKompanije oglasKompanije) {
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public OglasKompanije create(@RequestBody OglasKompanije oglasKompanije) {
+        LOGGER.info("***** Object to insert *****  " + oglasKompanije);
+//        OglasKompanijePk oglasKompanijePk = new OglasKompanijePk();
+//        oglasKompanijePk.setIdKompanije(oglasKompanije.getOglasKompanijePk().getIdKompanije());
         oglasKompanijeRepository.save(oglasKompanije);
         return oglasKompanije;
     }
@@ -47,6 +52,12 @@ public class OglasKompanijeRestController {
     public OglasKompanije update(OglasKompanije oglasKompanije) {
         oglasKompanijeRepository.save(oglasKompanije);
         return oglasKompanije;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable Long id) {
+        LOGGER.info("***** Object to delete *****  " + oglasKompanijeRepository.findById(id));
+        oglasKompanijeRepository.delete(oglasKompanijeRepository.findById(id));
     }
 
     @RequestMapping(value = "/search/getOglasKompanije")
