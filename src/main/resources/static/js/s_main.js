@@ -36,13 +36,12 @@ $('#sacuvajButton').click(function () {
             'Authorization': getCookie('token')
         },
         success: function (response) {
-            alert('Uspesno ste editovali studenta!');
-            refreshInfo();
+            alert('Uspesno editovan student!');
+            window.close();
+            location.reload();
         },
         error: function (response) {
-            alert('Uspesno ste editovali studenta');
-            refreshInfo();
-            this.close();
+            alert('Greska');
         }
 
     });
