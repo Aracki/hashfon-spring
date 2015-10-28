@@ -359,10 +359,6 @@ function napuniPocetnuKompanija() {
 
 
 function napuniSnipete(id) {
-    // setTimeout(function(){
-    // alert($('#email').val());
-    // }, 5000);
-    // alert($('#email').val());
     $.ajax({
         url: 'http://localhost:8080/api/resources/snippet/search/getByIdStudent?idStudent=' + id,
         dataType: 'json',
@@ -379,7 +375,6 @@ function napuniSnipete(id) {
             for (var i = 0; i < snipeti.length; i++) {
                 snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '' + snipeti[i].hash.tag + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="code"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</div>' + '</div>';
             }
-            // alert(snipethtml);
             $('#rowSnipeti').html(snipethtml);
         }
     });

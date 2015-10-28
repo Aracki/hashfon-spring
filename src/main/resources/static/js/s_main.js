@@ -241,6 +241,7 @@ function vratiKompaniju() {
         dataType: 'json',
         success: function (response) {
             napuniKompaniju(response);
+            napuniOglase(response.id);
         },
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', getCookie('token'));
@@ -254,9 +255,31 @@ function napuniKompaniju(k) {
     $('#email').html(k.email);
     $('#adresa').html(k.adresa);
     $('#miniNaslov').html(k.opis);
-    // $('#ime').html(k.ime);
-
 }
+
+function napuniOglase(id) {
+    $.ajax({
+        url: 'http://localhost:8080/api/resources/oglasKompanije/search/getByIdKompanije?idKompanije=' + id,
+        dataType: 'json',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getCookie('token')
+        },
+
+        success: function (response) {
+
+
+            var oglasi = response;
+            var oglasihtml = "";
+            for (var i = 0; i < oglasi.length; i++) {
+                oglasihtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '' + oglasi[i].naziv + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="code"> ' + oglasi[i].oglas + ' </p>' + '</div>' + '<div class="clearfix"></div>' + '</div>';
+            }
+            $('#rowOglasi').html(oglasihtml);
+        }
+    });
+}
+
+
 
 function napuniVestiOglasa() {
     $.ajax({
