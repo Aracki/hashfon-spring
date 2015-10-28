@@ -1,14 +1,21 @@
 package com.ro.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ro.persistence.model.Hash;
 import com.ro.persistence.model.Snippet;
+import com.ro.persistence.model.SnippetPk;
+import com.ro.persistence.model.Student;
+import com.ro.persistence.repositories.HashRepository;
 import com.ro.persistence.repositories.SnippetRepository;
+import com.ro.persistence.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -21,6 +28,12 @@ public class SnippetRestController {
 
     @Autowired
     SnippetRepository snippetRepository;
+
+    @Autowired
+    HashRepository hashRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
 
     @RequestMapping(value = "")
     public List<Snippet> getAll() {
@@ -39,17 +52,23 @@ public class SnippetRestController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@RequestParam String json) {
-        System.out.println(json);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            Snippet snippet = mapper.readValue(json, Snippet.class);
-            System.out.println(snippet.toString());
-            snippetRepository.save(snippet);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public Snippet create(@RequestBody Snippet snippet) {
+        System.out.println(snippet.toString());
+
+        try{
+            Hash hash = (Hash) hashRepository.findByTag(snippet.getHash().getTag());
+            snippet.setHash(hash);
+        } catch (Exception e){
+            snippet.getHash().setTag(snippet.getHash().getTag().toLowerCase());
+            hashRepository.save(snippet.getHash());
         }
-        return "Success";
+
+        Student s = studentRepository.findById(Long.parseLong("1"));
+        snippet.setStudent(s);
+        SnippetPk pk = new SnippetPk();
+        pk.setIdStudent(s.getId());
+        snippet.setSnippetPk(pk);
+        return snippetRepository.save(snippet);
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)
