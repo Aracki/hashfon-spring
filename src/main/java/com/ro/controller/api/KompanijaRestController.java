@@ -23,7 +23,7 @@ public class KompanijaRestController {
     @Autowired
     KompanijaRepository kompanijaRepository;
 
-    @RequestMapping(value = "")
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Kompanija> getAll() {
         return kompanijaRepository.findAll();
     }
@@ -57,7 +57,8 @@ public class KompanijaRestController {
     @RequestMapping(value = "", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Kompanija update(@RequestBody Kompanija k) {
         try {
-            logger.info("***** Podaci kompanije za update ****** " + k);
+//            Kompanija k = new Kompanija();
+            logger.info("********** Podaci kompanije za update ********** " + k);
             Kompanija kompanijaZaUpdate = kompanijaRepository.findById(k.getId());
             kompanijaZaUpdate.setAdresa(k.getAdresa());
             kompanijaZaUpdate.setEmail(k.getEmail());

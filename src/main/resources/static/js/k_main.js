@@ -376,7 +376,7 @@ $('#updateKompanija').click(function () {
         email: $('#emailUpdate').val(),
         adresa: $('#adresaUpdate').val(),
         opis: $('#opis').val(),
-        id: 3
+        id: 2
     };
 
     var jsonText = JSON.stringify(jsonObj);
