@@ -345,7 +345,6 @@ function napuniProfil() {
             $('#godD').html('Godina diplomiranja : ' + response.godinaDiplomiranja);
 
             $('#datumR').html('Datum rodjenja : ' + d + "." + m + "." + y + ".");
-
         }
     });
 }
@@ -372,7 +371,6 @@ function napuniProfilStudenta() {
             $('#godD').html('Godina diplomiranja : ' + response.godinaDiplomiranja);
 
             $('#datumR').html('Datum rodjenja : ' + d + "." + m + "." + y + ".");
-
         }
     });
 }
@@ -386,15 +384,23 @@ function napuniSnipeteStudenta() {
             'Content-Type': 'application/json',
             'Authorization': getCookie('token')
         },
-
         success: function (response) {
-
-
             var snipeti = response;
             var snipethtml = "";
             for (var i = 0; i < snipeti.length; i++) {
                 var idSnipet = snipeti[i].snippetPk.id;
-                snipethtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '<button class="btn btn-danger" id="XX' + idSnipet + '"' + ' <h4></a>' + snipeti[i].hash.tag + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p id="code"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + snipeti[i].student.ime + ' ' + snipeti[i].student.prezime + '</div>' + '</div>';
+                snipethtml += '<div class="panel panel-default">' +
+                    '<div class="panel-heading">' +
+                    '<h3> Hashtag snipeta: </h3>' +
+                    '<h4>#' + snipeti[i].hash.tag + '</h4>' +
+                    '</div>' +
+
+                    '<div class="panel-body">' + '	' +
+                    '<p id="code"> ' + snipeti[i].code + ' </p>' + '<div class="clearfix"></div>' + '<hr>' +
+                    snipeti[i].student.ime + ' ' + snipeti[i].student.prezime +
+                    '<button style="float:right;" class="btn btn-danger" id="XX' + idSnipet + '">Obrisi snipet</button>' +
+                    '</div>' +
+                    '</div>';
             }
             $('#rowSnipeti').html(snipethtml);
         }
@@ -404,6 +410,5 @@ function napuniSnipeteStudenta() {
 $(document).ready(function () {
     // searchKompanije();
     napuniVestiOglasa();
-
 });
 
