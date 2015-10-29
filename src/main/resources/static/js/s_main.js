@@ -82,7 +82,7 @@ $('#post_dugme').click(function () {
     };
 
     var json = JSON.stringify(string);
-    alert(json);
+
     $.ajax({
         url: 'http://localhost:8080/api/resources/snippet',
         dataType: 'json',
@@ -93,21 +93,17 @@ $('#post_dugme').click(function () {
             'Authorization': getCookie('token')
         },
         success: function (response) {
-            location.reload();
+            alert("Uspesno insertovan snippet!");
+            refreshInfo();
         }
-
     });
-
-
 });
 
 function refreshInfo() {
-    napuniProfil();
+    napuniSnipeteStudenta();
     var id = 0;
-    id = window.setInterval(napuniProfil, 100);
+    id = window.setInterval(napuniSnipeteStudenta(), 100);
     window.clearInterval(id);
-
-
 }
 
 $('#srch').click(function () {
@@ -124,22 +120,18 @@ $('#srch').click(function () {
             'Authorization': getCookie('token')
         },
     });
-
 });
 
 $(function () {
     $(document).on('click', '[id^=XX]', function () {
-
         var id = jQuery(this).attr("id");
         var niz = id.split('XX');
         var id1 = niz[1];
 
         var r = confirm("Da li si siguran/a?");
         if (r === true) {
-
             $.ajax({
                 url: 'http://localhost:8080/api/resources/snippet/' + id1,
-                //dataType: 'json',
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
@@ -147,16 +139,12 @@ $(function () {
                 },
                 success: function (response) {
                     alert("Uspesno obrisan snippet!");
-                    location.reload();
+                    refreshInfo();
                 }
             });
-
         }
-        location.reload();
+        refreshInfo();
     });
-});
-
-$('[id^="XXX"]').each(function () {
 });
 
 function napuniSidebarKompanije(kompanije) {
@@ -323,7 +311,6 @@ function napuniVestiOglasa() {
 //napuni profil studenta
 function napuniProfil() {
     var idStudenta = location.search.split('id=')[1];
-    alert(idStudenta);
     $.ajax({
         url: 'http://localhost:8080/api/resources/student/search/getById?id=' + idStudenta,
         dataType: 'json',

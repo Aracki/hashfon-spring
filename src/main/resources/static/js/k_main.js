@@ -18,7 +18,6 @@ $('#objavi_dugme').click(function () {
     };
 
     var json = JSON.stringify(string);
-    alert(json);
 
     $.ajax({
         url: 'http://localhost:8080/api/resources/oglasKompanije',
@@ -31,6 +30,7 @@ $('#objavi_dugme').click(function () {
         },
         success: function (response) {
             alert("Uspesan insert!");
+            refreshOglase();
         }
     });
     refreshOglase();
@@ -254,7 +254,18 @@ function napuniOglaseInfo() {
             var oglashtml = "";
             for (var i = 0; i < oglasi.length; i++) {
                 var idoglas = oglasi[i].oglasKompanijePk.id;
-                oglashtml += '<div class="panel panel-default">' + '<div class="panel-heading">' + '<button class="btn btn-danger" id="XXX' + idoglas + '"' + ' <h4></a>' + oglasi[i].naziv + '</h4>' + '</div>' + '<div class="panel-body">' + '	<p> ' + oglasi[i].oglas + ' </p>' + '<div class="clearfix"></div>' + '<hr>' + oglasi[i].kompanija.ime + '</div>' + '</div>';
+                oglashtml +=
+                    '<div class="panel panel-default">' +
+                    '<div class="panel-heading">' +
+                    '<h3>Ime oglasa: </h3>' +
+                    '<h4>' + oglasi[i].naziv + '</h4>' +
+                    '</div>' +
+                    '<div class="panel-body">' + '	<p> '
+                    + oglasi[i].oglas + ' </p>' + '<div class="clearfix"></div>' + '<hr>'
+                    + oglasi[i].kompanija.ime +
+                    '<button style="float:right;" class="btn btn-danger" id="XXX' + idoglas + '">Obrisi oglas</button> ' +
+                    '</div>' +
+                    '</div>';
             }
             $('#rowOglasi').html(oglashtml);
         }
@@ -267,25 +278,21 @@ $(function () {
         var id = jQuery(this).attr("id");
         var niz = id.split('XXX');
         var id1 = niz[1];
-        alert(id1);
 
         var r = confirm("Da li si siguran/a?");
         if (r === true) {
-
             $.ajax({
                 url: 'http://localhost:8080/api/resources/oglasKompanije/' + id1,
-                //dataType: 'json',
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': getCookie('token')
                 },
                 success: function (response) {
-                    alert("Uspesno!");
+                    alert("Uspesno obrisan oglas!");
                     refreshOglase();
                 }
             });
-
         }
         refreshOglase();
     });
