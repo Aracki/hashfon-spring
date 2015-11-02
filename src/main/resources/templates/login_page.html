@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>#fon login</title>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/login.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="col-md-4"></div>
+<div id="index-body" class="col-md-4">
+    <section class="login-form">
+        <form method="post" id="loginForma" action="/login">
+            <h2>#fon login</h2><br>
+            <input type="email" id="email" name='j_email' class="form-control" placeholder="Email address" required=""
+                   autofocus=""/>
+            <br>
+            <input type="password" id="password" name="j_password" class="form-control" placeholder="Password"
+                   required=""/>
+            <br>
+            <button id="logIn" type="button" class="btn btn-lg btn-primary btn-block">Log In</button>
+        </form>
+    </section>
+</div>
+<div class="col-md-4"></div>
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<!--<script type="text/javascript" src="js/main.js"></script>-->
+
+<script>
+    //    $('#logIn').click(logIn());
+    //    function logIn() {
+    //        username = document.getElementById("email").value;
+    //        var password = document.getElementById("password").value;
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "http://localhost:8080/login",
+    //            dataType: "json",
+    //            headers: {
+    //                'Content-Type': 'application/json'
+    //            },
+    //            beforeSend: function (xhr) {
+    //                xhr.setRequestHeader('Authorization', make_base_auth(username, password));
+    //            },
+    //            success: function (response) {
+    //                // napuniToken(response.token);
+    //                // document.cookie="getCookie('token')=" + getCookie('token');
+    //                json_token = response.token;
+    //                setCookie('token', json_token, 1);
+    //
+    //                if (response.klijent == "kompanija") {
+    //                    location.href = "projekat_hashfon_kompanija/k_pocetna.html";
+    //                } else {
+    //                    location.href = "projekat_hashfon_student/k_pocetna.html";
+    //                }
+    //                // return response.token;
+    //            },
+    //            async: false,
+    //
+    //            error: function (response) {
+    //                alert("Niste se uspesno ulogovali!");
+    //            }
+    //
+    //        });
+    //    }
+    //
+    //    function make_base_auth(user, password) {
+    //        var tok = user + ':' + password;
+    //        var hash = btoa(tok);
+    //        return "Basic " + hash;
+    //    }
+</script>
+
+
+</body>
+</html>
